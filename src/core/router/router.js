@@ -1,13 +1,12 @@
 import { NotFound } from "@/components/screens/not-found/not-found.component";
 import { Routes } from "./routes.data";
+import { Layout } from "@/components/layout/layout.component";
 
 export class Router {
-    #currentRoute
-    #routes
+    #routes = Routes
+    #currentRoute =  null
+    #layout = null
     constructor() {
-        this.#routes = Routes;
-        this.#currentRoute = null;
-
         this.#handleRouteChange()
     }
 
@@ -27,11 +26,23 @@ export class Router {
         }
 
         this.#currentRoute = route;
-        this.render()
+        this.#render()
     }
 
-    render() {
+    #render() {
+        debugger
         const component = new this.#currentRoute.component();
-        document.getElementById('app').innerHTML = component.render();
+
+        if (!this.#layout) {
+            this.#layout = new Layout({
+                router: this,
+                children: component.render()
+            })
+            document.getElementById('app').innerHTML = this.#layout.render()
+        }
+        else {
+            document.querySelector('main').innerHTML = component.render()
+        }
+        
     }
 }
