@@ -3,37 +3,37 @@ import { Routes } from "./routes.data";
 import { Layout } from "@/components/layout/layout.component";
 
 export class Router {
-    #routes = Routes
-    #currentRoute =  null
-    #layout = null
+    #routes = Routes;
+    #currentRoute =  null;
+    #layout = null;
     constructor() {
         window.addEventListener('popstate', () => {
-            this.#handleRouteChange()
+            this.#handleRouteChange();
         })
-        this.#handleRouteChange()
-        this.#handleLinks()
-    }
+        this.#handleRouteChange();
+        this.#handleLinks();
+    };
 
     #handleLinks() {
         document.addEventListener('click', event => {
-            const target = event.target.closest('a')
+            const target = event.target.closest('a');
             if (target) {
-                event.preventDefault()
-                this.navigate(target.href)
+                event.preventDefault();
+                this.navigate(target.href);
             }
         })
-    }
+    };
 
     getCurrentPath() {
         return window.location.pathname;
-    }
+    };
 
     navigate(path) {
         if (path !== this.getCurrentPath()) {
-            window.history.pushState({}, '', path)
-            this.#handleRouteChange()
+            window.history.pushState({}, '', path);
+            this.#handleRouteChange();
         }
-    }
+    };
 
     #handleRouteChange() {
         const path = this.getCurrentPath() || '/';
@@ -43,12 +43,11 @@ export class Router {
             route = {
                 component: NotFound
             }
-
-        }
+        };
 
         this.#currentRoute = route;
-        this.#render()
-    }
+        this.#render();
+    };
 
     #render() {
         debugger
@@ -59,11 +58,10 @@ export class Router {
                 router: this,
                 children: component.render()
             })
-            document.getElementById('app').innerHTML = this.#layout.render()
+            document.getElementById('app').innerHTML = this.#layout.render();
         }
         else {
-            document.querySelector('main').innerHTML = component.render()
+            document.querySelector('main').innerHTML = component.render();
         }
-        
-    }
-}
+    };
+};

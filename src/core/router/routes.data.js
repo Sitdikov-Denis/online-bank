@@ -15,4 +15,4 @@ export const Routes = [
         path: '/about-us',
         component: AboutUs
     }
-]
+];
