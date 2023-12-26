@@ -50,7 +50,6 @@ export class Router {
     };
 
     #render() {
-        debugger
         const component = new this.#currentRoute.component();
 
         if (!this.#layout) {
