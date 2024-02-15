@@ -1,4 +1,4 @@
-import { ChildComponent } from '../component/child.component'
+import ChildComponent from '../component/child.component'
 
 class RenderService {
 	/**
@@ -58,6 +58,7 @@ class RenderService {
 			}
 		}
 	}
+
 	/**
 	 * @param {Object} moduleStyles
 	 * @param {string} element
